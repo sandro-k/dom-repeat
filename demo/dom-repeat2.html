@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dom-repeat2</title>
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="../item-element.html">
+</head>
+<body>
+<template is="dom-bind">
+  <button on-tap="_addItems">AddItems</button>
+  <template is="dom-repeat" items="{{items}}">
+    <item-element item-id="[[item.itemId]]" values="[[item.values]]"></item-element>
+  </template>
+</template>
+<script>
+  var demo = document.querySelector('template[is="dom-bind"]');
+
+  demo.items = [
+    {itemId: 1, values: [1]},
+    {itemId: 2, values: [2]}
+  ];
+
+  demo._addItems = function () {
+    this.push("items", {itemId: demo.items.length + 1, values: [demo.items.length + 1]});
+  }
+
+</script>
+</body>
+</html>

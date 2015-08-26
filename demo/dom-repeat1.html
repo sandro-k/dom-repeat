@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dom-repeat</title>
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="../bower_components/polymer/polymer.html">
+</head>
+<body>
+<template is="dom-bind">
+  <button on-tap="_addItems">AddItems</button>
+  <template is="dom-repeat" items="{{items}}">
+    <h3>itemId: <span>[[item.itemId]]</span></h3>
+    <button on-tap="_addItem">AddItem</button>
+    <h3>Values:</h3>
+    <ul>
+      <template is="dom-repeat" items="{{item.values}}" as="value">
+        <li>[[value]]</li>
+      </template>
+    </ul>
+  </template>
+</template>
+<script>
+  var demo = document.querySelector('template[is="dom-bind"]');
+
+  demo.items = [
+    {itemId: 1, values: [1]},
+    {itemId: 2, values: [2]}
+  ];
+
+  demo._getIndexFromArray = function (arr, itemId) {
+    for (var i = 0; i < arr.length; i++) {
+      if(arr[i].itemId == itemId) {
+        return i;
+      }
+    }
+    return -1;
+  };
+
+  demo._addItem = function (e) {
+    console.log(e);
+    var itemId = e.model.item.itemId
+    var index = this._getIndexFromArray(this.items, itemId);
+    if(index != -1) {
+      var length = this.items[index].values.length;
+      var max  = this.items[index].values[length -1];
+      this.push("items." + index + ".values", max + 1 );
+    }
+  };
+
+  demo._addItems = function () {
+    this.push("items", {itemId: demo.items.length + 1, values: [demo.items.length + 1]});
+  }
+
+</script>
+</body>
+</html>
