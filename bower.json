@@ -1,0 +1,18 @@
+{
+  "name": "dom-repeat",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sandro-k/dom-repeat",
+  "authors": [
+    "Sandro Kock <sandro.kock@gmail.com>"
+  ],
+  "description": "Just a playground to test polymers dom-repeat element",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
