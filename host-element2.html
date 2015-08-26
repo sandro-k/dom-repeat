@@ -1,0 +1,40 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="item-element.html">
+<dom-module id="host-element2">
+  <template>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'host-element2',
+
+    properties: {
+      items: {
+        type: Array,
+        notify: true,
+        value: function () {
+          return [];
+        }
+      },
+
+    },
+
+    observers: [],
+
+    listeners: {
+      'item-element-register': "_registerItemElement"
+    },
+
+    _registerItemElement: function(event){
+      var itemElement = event.target;
+      this.push("items", itemElement);
+    },
+
+
+  });
+
+</script>

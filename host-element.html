@@ -1,0 +1,42 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="item-element.html">
+<dom-module id="host-element">
+  <template>
+    <button on-tap="_addItems">AddItems</button>
+    <template is="dom-repeat" items="{{items}}">
+      <item-element item-id="[[item.itemId]]" values="[[item.values]]"></item-element>
+    </template>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'host-element',
+
+    properties: {
+      items: {
+        type: Array,
+        value: function () {
+          return [
+            {itemId: 1, values: [1]},
+            {itemId: 2, values: [2]}
+          ];
+        }
+      }
+    },
+
+
+    observers: [],
+
+    listeners: {},
+
+    _addItems: function () {
+      this.push("items", {itemId: this.items.length + 1, values: [this.items.length + 1]});
+    }
+
+  });
+
+</script>
