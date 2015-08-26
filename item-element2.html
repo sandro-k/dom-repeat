@@ -26,6 +26,7 @@
     properties: {
       itemId: {
         type: Number,
+        notify: true,
       },
 
       values: {
@@ -40,6 +41,7 @@
     _addItem: function(){
       var max = this.values[this.values.length-1] || 0;
       this.push("values", max + 1 );
+      this._notifyItemElementChanged();
     },
 
     _log: function (item) {
@@ -48,7 +50,11 @@
 
     attached: function(){
       this.fire("item-element-register");
-    }
+    },
+
+    _notifyItemElementChanged: function(){
+      this.fire("item-element-changed");
+    },
 
 
   });
