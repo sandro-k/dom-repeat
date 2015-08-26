@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dom-repeat4</title>
+  <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="../host-element2.html">
+  <link rel="import" href="../item-element2.html">
+</head>
+<body>
+<template is="dom-bind">
+  <!--setup model-->
+  <host-element2 items="{{itemElements}}" items-copy="{{itemsCopy}}">
+    <item-element2 item-id="1" values='[1]'></item-element2>
+    <item-element2 item-id="2" values='[2]'></item-element2>
+  </host-element2>
+
+  <button on-tap="_reRender">Re-Render</button>
+
+  <!--create view-->
+  <h2>itemElements</h2>
+  <template is="dom-repeat" items="{{itemElements}}" observe="itemId values.*">
+    <div>
+      <h3>itemId: <span>[[item.itemId]]</span></h3>
+      <h3>Values: <span>[[item.values]]</span></h3>
+      <h3>Values:</h3>
+      <ul>
+      <template is="dom-repeat" items="{{item.values}}" as="value">
+        <li>[[value]]</li>
+      </template>
+      </ul>
+    </div>
+  </template>
+
+  <h2>itemsCopy</h2>
+  <template is="dom-repeat" items="{{itemsCopy}}" observe="itemId values.*">
+    <div>
+      <h3>itemId: <span>[[item.itemId]]</span></h3>
+      <h3>Values: <span>[[item.values]]</span></h3>
+      <h3>Values:</h3>
+      <ul>
+        <template is="dom-repeat" items="{{item.values}}" as="value">
+          <li>[[value]]</li>
+        </template>
+      </ul>
+    </div>
+  </template>
+
+
+
+
+</template>
+<script>
+  var demo = document.querySelector('template[is="dom-bind"]');
+  demo._reRender = function(){
+    var templates = document.querySelectorAll('template[is="dom-repeat"]');
+    Array.prototype.slice.call(templates).forEach(function(t){t.render();});
+  };
+</script>
+</body>
+</html>
