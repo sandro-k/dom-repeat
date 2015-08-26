@@ -8,6 +8,9 @@
   <link rel="import" href="../item-element2.html">
 </head>
 <body>
+<div>
+  <a href="../index.html">Back</a>
+</div>
 <template is="dom-bind">
   <!--setup model-->
   <host-element2 items="{{itemElements}}" items-copy="{{itemsCopy}}">
@@ -19,7 +22,7 @@
 
   <!--create view-->
   <h2>itemElements</h2>
-  <template is="dom-repeat" items="{{itemElements}}" observe="itemId values.*">
+  <template is="dom-repeat" items="{{itemElements}}" observe="values.*">
     <div>
       <h3>itemId: <span>[[item.itemId]]</span></h3>
       <h3>Values: <span>[[item.values]]</span></h3>
@@ -33,7 +36,7 @@
   </template>
 
   <h2>itemsCopy</h2>
-  <template is="dom-repeat" items="{{itemsCopy}}" observe="itemId values.*">
+  <template is="dom-repeat" items="{{itemsCopy}}" observe="values.*">
     <div>
       <h3>itemId: <span>[[item.itemId]]</span></h3>
       <h3>Values: <span>[[item.values]]</span></h3>

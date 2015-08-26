@@ -8,6 +8,9 @@
 </head>
 <body>
 <template is="dom-bind">
+  <div>
+    <a href="../index.html">Back</a>
+  </div>
   <button on-tap="_addItems">AddItems</button>
   <template is="dom-repeat" items="{{items}}">
     <h3>itemId: <span>[[item.itemId]]</span></h3>
