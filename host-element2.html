@@ -19,68 +19,29 @@
         value: function () {
           return [];
         }
-      },
-
-      itemsCopy: {
-        type: Array,
-        notify: true,
-        value: function () {
-          return [];
-        }
       }
-
     },
-
-    observers: [
-        "_itemsChanged(items.splices)",
-        "_itemsChangedDeep(items.*)"
-    ],
 
     listeners: {
       'item-element-register': "_registerItemElement",
       'item-element-changed': "_itemElementChanged"
     },
 
-    _itemsChanged: function(){
-      console.log("_itemsChanged", arguments);
-    },
-
-    _itemsChangedDeep: function(){
-      console.log("_itemsChangedDeep", arguments);
-    },
-
     _registerItemElement: function(event){
       var itemElement = event.target;
       this.push("items", itemElement);
-      this.push("itemsCopy", this._getItemObjectForItemElement(itemElement));
     },
 
-    _itemElementChanged: function(event){
-      var itemElement = event.target;
-      var index = this._getIndexForItemElement(this.itemsCopy, itemElement);
-      if (index != -1 ){
-        // replacing old with new copy
-        this.splice("itemsCopy", index, 1, this._getItemObjectForItemElement(itemElement));
+    _itemElementChanged: function(){
+      // the check is needed if this function is run multiple times in the same tick it would erase the whole array
+      if (this.items.length > 0){
+        var itemsTmp = this.items;
+        this.items = [];
+        this.async(function () {
+          this.self.items = this.items;
+        }.bind({items: itemsTmp, self: this}));
       }
-    },
-
-    _getIndexForItemElement: function(arr, item){
-      // assuming itemId is unique
-      for (var i = 0; i < arr.length; i++){
-        if (arr[i].itemId === item.itemId){
-          return i;
-        }
-      }
-      return -1;
-    },
-
-    _getItemObjectForItemElement: function(itemElement){
-      return {'itemId': itemElement.itemId, 'values': itemElement.values, element: itemElement};
     }
-
-
-
-
 
   });
 

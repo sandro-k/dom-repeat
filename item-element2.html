@@ -3,7 +3,6 @@
 <dom-module id="item-element2">
 
   <template>
-    <span>[[_log(item)]]</span>
     <h3>itemId: <span>[[itemId]]</span></h3>
     <button on-tap="_addItem">AddItem</button>
     <h3>Values:</h3>
@@ -26,7 +25,7 @@
     properties: {
       itemId: {
         type: Number,
-        notify: true,
+        notify: true
       },
 
       values: {
@@ -35,17 +34,13 @@
         value: function(){
           return [];
         }
-      },
+      }
     },
 
     _addItem: function(){
       var max = this.values[this.values.length-1] || 0;
       this.push("values", max + 1 );
       this._notifyItemElementChanged();
-    },
-
-    _log: function (item) {
-      console.log("log", item);
     },
 
     attached: function(){
@@ -55,7 +50,6 @@
     _notifyItemElementChanged: function(){
       this.fire("item-element-changed");
     },
-
 
   });
 

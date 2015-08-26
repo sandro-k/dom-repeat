@@ -13,7 +13,7 @@
 </div>
 <template is="dom-bind">
   <!--setup model-->
-  <host-element2 items="{{itemElements}}" items-copy="{{itemsCopy}}">
+  <host-element2 items="{{itemElements}}">
     <item-element2 item-id="1" values='[1]'></item-element2>
     <item-element2 item-id="2" values='[2]'></item-element2>
   </host-element2>
@@ -22,7 +22,7 @@
 
   <!--create view-->
   <h2>itemElements</h2>
-  <template is="dom-repeat" items="{{itemElements}}" observe="values.*">
+  <template is="dom-repeat" items="{{itemElements}}">
     <div>
       <h3>itemId: <span>[[item.itemId]]</span></h3>
       <h3>Values: <span>[[item.values]]</span></h3>
@@ -34,23 +34,6 @@
       </ul>
     </div>
   </template>
-
-  <h2>itemsCopy</h2>
-  <template is="dom-repeat" items="{{itemsCopy}}" observe="values.*">
-    <div>
-      <h3>itemId: <span>[[item.itemId]]</span></h3>
-      <h3>Values: <span>[[item.values]]</span></h3>
-      <h3>Values:</h3>
-      <ul>
-        <template is="dom-repeat" items="{{item.values}}" as="value">
-          <li>[[value]]</li>
-        </template>
-      </ul>
-    </div>
-  </template>
-
-
-
 
 </template>
 <script>
