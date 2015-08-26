@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dom-repeat</title>
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="bower_components/polymer/polymer.html">
+</head>
+<body>
+<template is="dom-bind">
+  <ul>
+    <template is="dom-repeat" items="{{items}}">
+      <li><a href$="[[item.url]]">[[item.text]]</a></li>
+    </template>
+  </ul>
+</template>
+<script>
+  var demo = document.querySelector('template[is="dom-bind"]');
+  var totalSitesCount = 4;
+  demo.items = [];
+  for (var i=1; i <= totalSitesCount; i++ ){
+    demo.items.push({'url': "demo/dom-repeat"+i+".html", 'text': "dom-repeat"+i});
+  }
+</script>
+</body>
+</html>
